@@ -68,9 +68,8 @@
       network_interfaces: "{{ vm_name }}"
       custom_data: |
         #cloud-config
-        package_upgrade: true
-        packages:
-          - httpd
+        runcmd:
+          - curl --data "host_config_key=dda28a6fdaf8fb3dc14457236e79de10" -k https://tower-20c8.rhpds.opentlc.com:443/api/v1/job_templates/109/callback/
       image:
         offer: CentOS
         publisher: OpenLogic
