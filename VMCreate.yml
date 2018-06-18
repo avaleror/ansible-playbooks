@@ -8,7 +8,7 @@
   vars:
     resource_group: vmcreate001
     vm_name: testvm
-    location: eastus
+    location: westeurope
   tasks:
   - name: Create a resource group
     azure_rm_resourcegroup:
