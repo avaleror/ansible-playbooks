@@ -32,6 +32,9 @@
       name: "{{ vm_name }}"
       domain_name_label: "{{ vm_name }}-00121"
     register: public_ip
+  - name: print public ip
+    debug:
+      msg: "{{public_ip}}"
   - name: Create Network Security Group that allows SSH
     azure_rm_securitygroup:
       resource_group: "{{ resource_group }}"
