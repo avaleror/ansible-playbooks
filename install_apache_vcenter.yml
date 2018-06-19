@@ -4,3 +4,5 @@
       yum: name=httpd state=present
     - name: start apache
       service: name=httpd state=started
+    - name: Open firewall
+      firewalld: state=enabled port=80/tcp permanent=true immediate=true
