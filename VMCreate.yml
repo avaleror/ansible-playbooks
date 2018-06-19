@@ -62,7 +62,7 @@
       resource_group: "{{ resource_group }}"
       name: "{{ vm_name }}"
       tags:
-        "ip": "{{public_ip['ip_address']}}"
+        "{{public_ip['ip_address']}}": ""
       vm_size: Standard_DS1_v2
       ssh_public_keys:
         - key_data: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCsk5MB07uAjqbvSXFhO2ohOPYpboZVMLIdSX9TxGmP9hwhh2LlUpYP+278U17YsrpYZVCgcBWSLLaAI4HOjeUraq3Yez8ZroHwM0dKaIjGOHOBSMisnWzPF0dKjQVp8ZhxLsU7LsZXaHWMfcp02gGod43w0SZVcDLiupnLZjf2eOB8h0PpdYerPDRqi4SDKrviUTcDZWJVnB1cNZtfPc/fXHHfG0OA2eXKdOyzivu/7ZMnfm6slMUjC/lr67p3OmNOHfgEYaQmMi3esV92/52V31PJ22ZoBINq/Ou2K2nLHqNk6WG837ajPfkYYrFR30BhZ29Rh+xx0FNnky87cNmt root@tower.example.com
