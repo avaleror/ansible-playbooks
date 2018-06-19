@@ -31,10 +31,6 @@
       allocation_method: Static
       name: "{{ vm_name }}"
       domain_name_label: "{{ vm_name }}-00121"
-    register: public_ip
-  - name: print public ip
-    debug:
-      msg: "{{public_ip['state']['ip_address']}}"
   - name: Create Network Security Group that allows SSH
     azure_rm_securitygroup:
       resource_group: "{{ resource_group }}"
@@ -60,15 +56,10 @@
       subnet: "{{ vm_name }}"
       public_ip_name: "{{ vm_name }}"
       security_group: "{{ vm_name }}"
-  - name: set ip
-    set_fact:
-      ip: "{{public_ip['state']['ip_address']}}"
   - name: Create VM
     azure_rm_virtualmachine:
       resource_group: "{{ resource_group }}"
       name: "{{ vm_name }}"
-      tags:
-        "{{ip}}": "" 
       vm_size: Standard_DS1_v2
       ssh_public_keys:
         - key_data: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCsk5MB07uAjqbvSXFhO2ohOPYpboZVMLIdSX9TxGmP9hwhh2LlUpYP+278U17YsrpYZVCgcBWSLLaAI4HOjeUraq3Yez8ZroHwM0dKaIjGOHOBSMisnWzPF0dKjQVp8ZhxLsU7LsZXaHWMfcp02gGod43w0SZVcDLiupnLZjf2eOB8h0PpdYerPDRqi4SDKrviUTcDZWJVnB1cNZtfPc/fXHHfG0OA2eXKdOyzivu/7ZMnfm6slMUjC/lr67p3OmNOHfgEYaQmMi3esV92/52V31PJ22ZoBINq/Ou2K2nLHqNk6WG837ajPfkYYrFR30BhZ29Rh+xx0FNnky87cNmt root@tower.example.com
