@@ -31,6 +31,7 @@
       allocation_method: Static
       name: "{{ vm_name }}"
       domain_name_label: "{{ vm_name }}-00121"
+    register: public_ip
   - name: Create Network Security Group that allows SSH
     azure_rm_securitygroup:
       resource_group: "{{ resource_group }}"
@@ -60,6 +61,8 @@
     azure_rm_virtualmachine:
       resource_group: "{{ resource_group }}"
       name: "{{ vm_name }}"
+      tags:
+        ip: "{{public_ip['ip_address']}}"
       vm_size: Standard_DS1_v2
       ssh_public_keys:
         - key_data: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCsk5MB07uAjqbvSXFhO2ohOPYpboZVMLIdSX9TxGmP9hwhh2LlUpYP+278U17YsrpYZVCgcBWSLLaAI4HOjeUraq3Yez8ZroHwM0dKaIjGOHOBSMisnWzPF0dKjQVp8ZhxLsU7LsZXaHWMfcp02gGod43w0SZVcDLiupnLZjf2eOB8h0PpdYerPDRqi4SDKrviUTcDZWJVnB1cNZtfPc/fXHHfG0OA2eXKdOyzivu/7ZMnfm6slMUjC/lr67p3OmNOHfgEYaQmMi3esV92/52V31PJ22ZoBINq/Ou2K2nLHqNk6WG837ajPfkYYrFR30BhZ29Rh+xx0FNnky87cNmt root@tower.example.com
@@ -70,7 +73,7 @@
       custom_data: |
         #cloud-config
         runcmd:
-          - curl --data "host_config_key=dda28a6fdaf8fb3dc14457236e79de10" -k https://tower-20c8.rhpds.opentlc.com:443/api/v1/job_templates/109/callback/
+          - curl --data "host_config_key=1a382ad9aad5bc264fc1cdf86b97cbd0" -k https://tower-20c8.rhpds.opentlc.com:443/api/v2/job_templates/9/callback/
       image:
         offer: CentOS
         publisher: OpenLogic
