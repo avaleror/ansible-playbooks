@@ -1,6 +1,8 @@
-- hosts: azure
+- hosts: all
   tasks:
     - name: install apache
       yum: name=httpd state=present
     - name: start apache
       service: name=httpd state=started
+    - name: open firewall
+      firewalld: state=enabled port=80/tcp permanent=true immediate=true
