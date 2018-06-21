@@ -67,10 +67,7 @@
       admin_username: azureuser
       admin_password: Password@123
       network_interfaces: "{{ vm_name }}"
-      custom_data: |
-        #cloud-config
-        runcmd:
-          - curl --data "host_config_key=1a382ad9aad5bc264fc1cdf86b97cbd0" -k https://tower-20c8.rhpds.opentlc.com:443/api/v2/job_templates/9/callback/
+      
       image:
         offer: CentOS
         publisher: OpenLogic
